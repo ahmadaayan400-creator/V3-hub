@@ -3412,7 +3412,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/ahmadaayan400-creator
 
 btn("OUTFIT REVELER (OLD) 😈", P13, function() 
 		
-loadstring(game:HttpGet(""))() end)
+loadstring(game:HttpGet("https://pastebin.com/raw/d4u4u9tn"))() end)
 
 
 
