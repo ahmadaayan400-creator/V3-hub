@@ -2509,7 +2509,7 @@ if channel then
     end)
 		end		
 		
-loadstring(game:HttpGet("https://pastebin.com/raw/TstyMhsU"))()end)
+loadstring(game:HttpGet("https://pastebin.com/raw/DGG9MHx7"))()end)
 
 btn("CUSTOM SPAM 3 😈🌚",P5,function()
 		
@@ -3405,9 +3405,15 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Veaquach/kruel/refs/h
 btn("EXECUTOR 😾", P13, function() 
 		
 loadstring(game:HttpGet("https://raw.githubusercontent.com/ahmadaayan400-creator/Zz-EXECUTOR-/refs/heads/main/executor.lua"))() end)
-btn("AAYAN EMOTE (BEST) ", P13, function() 
+btn("AAYAN EMOTE (BEST) 👤", P13, function() 
 		
 loadstring(game:HttpGet("https://raw.githubusercontent.com/ahmadaayan400-creator/AAYAN-EMOTE-/refs/heads/main/AAYAN_EMOTE.lua"))() end)
+
+
+btn("OUTFIT REVELER (OLD) 😈", P13, function() 
+		
+loadstring(game:HttpGet(""))() end)
+
 
 
 btn("SPECIAL MODES 😋 ", P13, function() 
@@ -3420,7 +3426,7 @@ btn("DRONE CONTROLLER 🚁", P13, function() loadstring(game:HttpGet("https://pa
 
 btn("AURA GLITCH 🎭", P13, function() loadstring(game:HttpGet("https://pastebin.com/raw/Uq7htgyG"))() end)
 
-btn("OUTFIT REVELER V3😈", P13, function() 
+btn("OUTFIT REVELER (NEW) 😈", P13, function() 
 		
 loadstring(game:HttpGet("https://raw.githubusercontent.com/ahmadaayan400-creator/Reveal-/main/AAYAN%20OUTFIT%20V4.lua"))() end)
 
