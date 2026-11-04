@@ -3104,7 +3104,7 @@ if channel then
     end)
 		end		
 loadstring(game:HttpGet("https://pastebin.com/raw/TsLFDeKw"))() end)
-btn("MULTI TARGET V3 💥🕷️", P6, function() 
+btn("MULTI TARGET 💥🕷️ (0.1 delay)", P6, function() 
 local message = "SCRIPT BY " .. playerName
     .. " ____//____MULTI TARGET BANGER 💀🔥____//____ "
     .. "~~~~~~~~~👽☠️ "
@@ -3126,6 +3126,11 @@ if channel then
 		end		
 		
 loadstring(game:HttpGet("https://pastebin.com/raw/BHYtZjgL"))() end)
+btn("0 DELAY BANG 💥🕷️", P6, function() 
+	
+		
+loadstring(game:HttpGet("https://raw.githubusercontent.com/ahmadaayan400-creator/0-DELAY/refs/heads/main/AAYAN_GREEN_THEME.lua"))() end)
+
 
 btn("VOICE BANG 🗣️", P6, function() 
 local message = "SCRIPT BY " .. playerName
