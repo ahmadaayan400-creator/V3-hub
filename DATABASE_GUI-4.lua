@@ -19,7 +19,7 @@ local PlayerGui = player:WaitForChild("PlayerGui")
 -- SETTINGS YOU MAY WANT TO CHANGE
 --==================================================
 
-local SONG_ASSET_FILE = "ll_song7_5.mp3" -- created by NOX when Luz Roja is played once
+local SONG_ASSET_FILE = "ll_song7_5.mp3" -- created by aayan when Luz Roja is played once
 -- Gap between every element. Roblox offsets are whole pixels,
 -- so the requested 0.9 gap is rounded to 1 pixel.
 local GAP = 1
