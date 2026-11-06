@@ -19,7 +19,7 @@ local PlayerGui = player:WaitForChild("PlayerGui")
 -- SETTINGS YOU MAY WANT TO CHANGE
 --==================================================
 
-local SONG_ID = 140504265985079
+local SONG_ID = 7731013599
 -- Gap between every element. Roblox offsets are whole pixels,
 -- so the requested 0.9 gap is rounded to 1 pixel.
 local GAP = 1
