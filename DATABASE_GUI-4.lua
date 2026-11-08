@@ -1,6 +1,6 @@
 --// AAYAN V3 - FULL SCRIPT
 --// Premium GUI + aura + sound system + customizer + INFO tab
---// ROBLOX LOCAL SCRIPT
+--/ ROBLOX LOCAL SCRIPT
 
 local Players = game:GetService("Players")
 local TweenService = game:GetService("TweenService")
