@@ -1,4 +1,4 @@
---// AAYAN V3 - FULL SCRIPT
+--// AAYAN HUB V3 - FULL SCRIPT
 --// Premium GUI + aura + sound system + customizer + INFO tab
 --// ROBLOX LOCAL SCRIPT
 
