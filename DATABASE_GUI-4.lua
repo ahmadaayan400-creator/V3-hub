@@ -2946,6 +2946,9 @@ end
 --==================================================
 -- P11 : VOIDOUT
 --==================================================
+btn("MULTI FLING 👺🗿", P11, function() loadstring(game:HttpGet("https://pastefy.app/QmuTt7Rf/raw"))() end)
+
+
 btn("FAKEOUT 1 🌚", P11, function() loadstring(game:HttpGet("https://pastebin.com/raw/67KEqzjv"))() end)
 
 btn("FAKEOUT 2 🗿", P11, function() loadstring(game:HttpGet("https://pastebin.com/raw/meJYGz4a"))() end)
