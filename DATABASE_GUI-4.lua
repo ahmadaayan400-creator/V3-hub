@@ -3001,7 +3001,7 @@ btn("🎵 DJ PLAYER",P7,function()
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/ahmadaayan400-creator/Music-/refs/heads/main/Aayan_Music_System.lua"))()end)
 
 
-btn("AAYAN BANG(JERK💦)", P6, function 
+btn("AAYAN BANG(JERK💦)",P6, function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/ahmadaayan400-creator/AAYAN-BANG-/refs/heads/main/deobfuscated.lua%20(17).txt"))()end)
 
 		
