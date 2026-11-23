@@ -3070,7 +3070,7 @@ btn("🎵 DJ PLAYER",P7,function()
 btn("AAYAN BANG(JERK💦)",P6, function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/ahmadaayan400-creator/AAYAN-BANG-/refs/heads/main/deobfuscated.lua%20(17).txt"))()end)
 
-("STICKY +0 DELAY BANG",P6, function() 		
+btn("STICKY +0 DELAY BANG",P6, function() 		
 loadstring(game:HttpGet("https://raw.githubusercontent.com/ahmadaayan400-creator/ALPHA/main/Zz.bang"))()end)
 
 
@@ -3209,7 +3209,7 @@ loadstring(game:HttpGet("https://pastebin.com/raw/BHYtZjgL"))()end)
 btn("TXR BANGER 👀💗",P6, function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/yelelode/UNO/refs/heads/main/Source.lua2"))()end)
 
-("0 DELAY BANG 💥🕷️",P6, function() 
+btn("0 DELAY BANG 💥🕷️",P6, function() 
 	
 		
 loadstring(game:HttpGet("https://raw.githubusercontent.com/ahmadaayan400-creator/0-DELAY/refs/heads/main/AAYAN_GREEN_THEME.lua"))()end)
