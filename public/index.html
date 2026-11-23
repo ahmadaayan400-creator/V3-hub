@@ -1,0 +1,337 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ALPHA EMPIRE PROTECTOR</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+:root{
+ --blue:#37baff;
+ --purple:#a46bff;
+ --light:#e3d6ff;
+}
+
+body{
+ min-height:100vh;
+ background:#030515;
+ color:white;
+ font-family:'Rajdhani',sans-serif;
+ overflow-x:hidden;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ padding:35px 15px;
+}
+
+.background{
+ position:fixed;
+ inset:0;
+ z-index:-5;
+ background:
+ linear-gradient(180deg,rgba(2,4,20,.35),rgba(3,3,20,.82)),
+ url("https://images.unsplash.com/photo-1771893351803-f1d244961c76?auto=format&fit=crop&w=1800&q=85")
+ center/cover no-repeat;
+ transform:scale(1.04);
+ animation:zoom 18s ease-in-out infinite alternate;
+}
+
+@keyframes zoom{
+ to{transform:scale(1.13)}
+}
+
+.background::after{
+ content:"";
+ position:absolute;
+ inset:0;
+ background:linear-gradient(110deg,
+ rgba(28,60,180,.3),
+ rgba(80,20,150,.35),
+ rgba(0,130,255,.2));
+}
+
+.aurora{
+ position:fixed;
+ inset:-20%;
+ z-index:-3;
+ pointer-events:none;
+ background:
+ radial-gradient(ellipse,rgba(107,63,255,.22),transparent 55%),
+ radial-gradient(ellipse at 70% 60%,rgba(0,145,255,.19),transparent 50%);
+ filter:blur(35px);
+ animation:aurora 8s ease-in-out infinite alternate;
+}
+
+@keyframes aurora{
+ to{transform:translate(5%,4%) rotate(12deg)}
+}
+
+#particles{
+ position:fixed;
+ inset:0;
+ overflow:hidden;
+ pointer-events:none;
+ z-index:5;
+}
+
+.particle{
+ position:absolute;
+ top:-30px;
+ color:#c5a6ff;
+ text-shadow:0 0 12px #9c65ff,0 0 25px #38baff;
+ animation:fall linear infinite;
+}
+
+@keyframes fall{
+ to{transform:translate3d(100px,110vh,0) rotate(720deg)}
+}
+
+.lightning{
+ position:fixed;
+ inset:0;
+ z-index:-1;
+ pointer-events:none;
+ background:#a98aff;
+ opacity:0;
+ animation:flash 9s infinite;
+}
+
+@keyframes flash{
+ 0%,94%,96%,100%{opacity:0}
+ 95%{opacity:.09}
+}
+
+.container{
+ width:100%;
+ max-width:650px;
+ position:relative;
+ padding:35px 24px;
+ text-align:center;
+ border:1px solid rgba(155,112,255,.7);
+ border-radius:28px;
+ background:rgba(3,6,26,.76);
+ backdrop-filter:blur(18px);
+ box-shadow:
+ 0 0 30px rgba(126,77,255,.35),
+ 0 0 80px rgba(0,137,255,.18),
+ inset 0 0 35px rgba(113,75,255,.09);
+ animation:appear 1.2s ease;
+}
+
+@keyframes appear{
+ from{opacity:0;transform:translateY(35px)}
+ to{opacity:1;transform:translateY(0)}
+}
+
+.container::before{
+ content:"";
+ position:absolute;
+ inset:-2px;
+ border-radius:29px;
+ border:1px solid transparent;
+ background:linear-gradient(130deg,#37baff,#9d59ff,#37baff) border-box;
+ -webkit-mask:linear-gradient(#fff 0 0) padding-box,linear-gradient(#fff 0 0);
+ -webkit-mask-composite:xor;
+ mask-composite:exclude;
+ pointer-events:none;
+ animation:borderglow 4s linear infinite;
+}
+
+@keyframes borderglow{
+ 50%{filter:hue-rotate(70deg)}
+}
+
+.logo{
+ font-size:105px;
+ line-height:1.2;
+ filter:drop-shadow(0 0 12px #6e8dff)
+        drop-shadow(0 0 30px #963cff);
+ animation:float 3s ease-in-out infinite;
+}
+
+@keyframes float{
+ 50%{transform:translateY(-10px)}
+}
+
+.brand{
+ font-family:'Cinzel',serif;
+ font-size:clamp(27px,7vw,43px);
+ font-weight:900;
+ letter-spacing:2px;
+ background:linear-gradient(90deg,#fff,#a98aff,#50caff,#fff);
+ background-size:250%;
+ -webkit-background-clip:text;
+ color:transparent;
+ animation:shine 5s linear infinite;
+}
+
+@keyframes shine{
+ to{background-position:250% center}
+}
+
+.subtitle{
+ font-family:'Orbitron',sans-serif;
+ letter-spacing:8px;
+ font-size:16px;
+ margin-top:12px;
+ color:#c3a8ff;
+ text-shadow:0 0 15px #8e52ff;
+}
+
+.line{
+ height:2px;
+ width:75%;
+ margin:25px auto;
+ background:linear-gradient(90deg,transparent,#a76aff,#35baff,transparent);
+ box-shadow:0 0 15px #885aff;
+}
+
+.message{
+ font-size:19px;
+ line-height:1.8;
+ color:#dedbff;
+ letter-spacing:1px;
+}
+
+.message span{
+ color:#69caff;
+ text-shadow:0 0 12px #3e85ff;
+}
+
+.scriptbox{
+ position:relative;
+ margin-top:28px;
+ padding:20px 18px;
+ background:rgba(0,0,15,.85);
+ border:1px solid #895bff;
+ border-radius:17px;
+ text-align:left;
+ box-shadow:0 0 20px #6846ff30;
+}
+
+.scriptbox code{
+ display:block;
+ color:#cbb5ff;
+ font-family:monospace;
+ font-size:13px;
+ line-height:1.8;
+ overflow-wrap:anywhere;
+}
+
+.copy{
+ width:90%;
+ margin-top:28px;
+ padding:17px;
+ border:1px solid #a78bff;
+ border-radius:15px;
+ background:linear-gradient(100deg,#672bcb,#235de1,#813cff);
+ color:white;
+ font-family:'Orbitron',sans-serif;
+ font-weight:700;
+ font-size:15px;
+ letter-spacing:2px;
+ cursor:pointer;
+ box-shadow:0 0 20px #754bff88;
+ transition:.3s;
+}
+
+.copy:hover{
+ transform:scale(1.04);
+ box-shadow:0 0 35px #399dff;
+}
+
+.copy:active{transform:scale(.96)}
+
+.footer{
+ margin-top:35px;
+ color:#b6a7e8;
+ font-family:'Orbitron',sans-serif;
+ font-size:10px;
+ letter-spacing:3px;
+ line-height:2;
+}
+
+@media(max-width:420px){
+ .container{padding:28px 17px}
+ .logo{font-size:85px}
+ .subtitle{letter-spacing:5px}
+ .message{font-size:16px}
+}
+</style>
+</head>
+
+<body>
+
+<div class="background"></div>
+<div class="aurora"></div>
+<div class="lightning"></div>
+<div id="particles"></div>
+
+<main class="container">
+
+ <div class="logo">⛩️</div>
+
+ <h1 class="brand">ALPHA EMPIRE</h1>
+ <div class="subtitle">PROTECTOR</div>
+
+ <div class="line"></div>
+
+ <div class="message">
+  THIS SCRIPT IS PROTECTED BY<br>
+  <span>ALPHA EMPIRE</span><br>
+  UNAUTHORIZED ACCESS IS NOT ALLOWED
+ </div>
+
+ <div class="scriptbox">
+  <code id="loader">loadstring(game:HttpGet("https://YOUR-RENDER-SERVICE.onrender.com/load"))()</code>
+ </div>
+
+ <button class="copy" id="copyBtn" onclick="copyScript()">
+  ⧉ COPY SCRIPT
+ </button>
+
+ <div class="line"></div>
+
+ <div class="footer">
+  ⛩ ALPHA EMPIRE ⛩<br>
+  SCRIPT PROTECTION SYSTEM
+ </div>
+
+</main>
+
+<script>
+const loader = document.getElementById("loader");
+const btn = document.getElementById("copyBtn");
+
+async function copyScript(){
+ try{
+  await navigator.clipboard.writeText(loader.innerText.trim());
+  btn.innerText = "✓ COPIED SUCCESSFULLY";
+  setTimeout(()=>btn.innerText="⧉ COPY SCRIPT",2000);
+ }catch(e){
+  btn.innerText="COPY FAILED";
+ }
+}
+
+const particles=document.getElementById("particles");
+
+for(let i=0;i<35;i++){
+ const p=document.createElement("div");
+ p.className="particle";
+ p.textContent=Math.random()>.5?"✦":"❀";
+ p.style.left=Math.random()*100+"%";
+ p.style.animationDuration=(7+Math.random()*12)+"s";
+ p.style.animationDelay=(-Math.random()*15)+"s";
+ p.style.fontSize=(10+Math.random()*17)+"px";
+ particles.appendChild(p);
+}
+</script>
+
+</body>
+</html>
