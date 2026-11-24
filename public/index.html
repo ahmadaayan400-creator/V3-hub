@@ -1,16 +1,28 @@
 <!doctype html>
 <html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Alpha Empire Protector</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
   *{box-sizing:border-box;margin:0;padding:0;}
-  html,body{min-height:100vh;background:#0c0406;color:#fff;font-family:Arial,'Helvetica Neue',sans-serif;
+  html,body{min-height:100vh;background:#070615;color:#fff;font-family:'Rajdhani',Arial,sans-serif;
     overflow-x:hidden;}
   .scene{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:40px 20px;
-    background:radial-gradient(circle at 50% 10%,#3a0f14 0%,#1a0608 45%,#0c0406 80%);overflow:hidden;}
+    background:radial-gradient(circle at 50% 8%,#2a1b5c 0%,#1a1040 35%,#0c0820 65%,#070615 100%);overflow:hidden;}
+  .vignette{position:absolute;inset:0;z-index:1;pointer-events:none;
+    background:radial-gradient(circle at 50% 45%,transparent 40%,rgba(0,0,0,0.55) 100%);}
+  .spark{position:fixed;width:3px;height:3px;border-radius:50%;background:#b9a8ff;opacity:0;
+    animation:sparkle 3.5s ease-in-out infinite;z-index:1;}
+  @keyframes sparkle{ 0%,100%{opacity:0;} 50%{opacity:0.9;} }
+
+  .orb{position:absolute;border-radius:50%;filter:blur(50px);z-index:0;opacity:0.55;
+    animation:orbDrift 10s ease-in-out infinite;}
+  @keyframes orbDrift{ 0%,100%{transform:translate(0,0);} 50%{transform:translate(18px,-14px);} }
 
   .skyline{position:absolute;bottom:0;left:0;width:100%;height:28vh;z-index:0;opacity:0.9;}
 
-  .petal{position:fixed;top:-20px;width:14px;height:14px;background:#ff6b8a;opacity:0.8;
+  .petal{position:fixed;top:-20px;width:14px;height:14px;background:#7aa8ff;opacity:0.75;
     border-radius:0 60% 0 60%;animation:fall linear infinite;z-index:1;}
   @keyframes fall{
     0%{transform:translateY(0) rotate(0deg);opacity:0;}
@@ -19,41 +31,86 @@
   }
 
   @keyframes cardIn{ from{opacity:0; transform:translateY(24px) scale(0.97);} to{opacity:1; transform:translateY(0) scale(1);} }
-  @keyframes emblemPulse{ 0%,100%{filter:drop-shadow(0 0 22px rgba(255,40,60,0.55));} 50%{filter:drop-shadow(0 0 40px rgba(255,60,90,0.85));} }
-  @keyframes titleGlow{ 0%,100%{text-shadow:0 0 22px rgba(255,60,80,0.5);} 50%{text-shadow:0 0 38px rgba(255,80,100,0.85);} }
+  @keyframes emblemPulse{ 0%,100%{filter:drop-shadow(0 0 22px rgba(130,110,255,0.55));} 50%{filter:drop-shadow(0 0 42px rgba(90,160,255,0.85));} }
+  @keyframes titleGlow{ 0%,100%{text-shadow:0 0 22px rgba(120,130,255,0.5);} 50%{text-shadow:0 0 38px rgba(140,110,255,0.85);} }
+  @keyframes scan{ 0%{transform:translateY(-100%);} 100%{transform:translateY(100%);} }
+  @keyframes dotPulse{ 0%,100%{box-shadow:0 0 0 0 rgba(110,230,140,0.6);} 50%{box-shadow:0 0 0 6px rgba(110,230,140,0);} }
+  @keyframes toriiSweep{ 0%,88%{transform:translateY(-130%) rotate(8deg);} 100%{transform:translateY(130%) rotate(8deg);} }
+  @keyframes borderRotate{ to{ transform:rotate(360deg); } }
+  @keyframes fadeUp{ from{opacity:0; transform:translateY(14px);} to{opacity:1; transform:translateY(0);} }
+  @keyframes btnShine{ 0%{transform:translateX(-120%) skewX(-20deg);} 100%{transform:translateX(220%) skewX(-20deg);} }
 
-  .card{position:relative;z-index:2;max-width:460px;width:100%;background:rgba(18,8,10,0.72);
-    backdrop-filter:blur(6px);border:1px solid rgba(255,120,140,0.3);border-radius:26px;
-    padding:40px 30px;text-align:center;box-shadow:0 0 90px rgba(255,40,60,0.25),0 30px 80px rgba(0,0,0,0.6);
-    animation:cardIn 0.6s ease-out;}
+  .cardglow{position:relative;z-index:2;max-width:460px;width:100%;border-radius:28px;padding:2px;overflow:hidden;}
+  .cardglow::before{content:"";position:absolute;inset:-50%;z-index:0;
+    background:conic-gradient(from 0deg, #6a8bff, #a86bff, #4fd1ff, #a86bff, #6a8bff);
+    animation:borderRotate 6s linear infinite;}
+  .card{position:relative;z-index:1;background:rgba(14,10,28,0.94);
+    backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-radius:26px;
+    padding:42px 32px;text-align:center;box-shadow:0 0 100px rgba(110,110,255,0.22),0 40px 90px rgba(0,0,0,0.65),
+      inset 0 1px 0 rgba(255,255,255,0.06);
+    animation:cardIn 0.6s ease-out;overflow:hidden;}
+  .grain{position:absolute;inset:0;z-index:0;opacity:0.05;pointer-events:none;mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+  .cardinner{position:relative;z-index:1;}
 
-  .emblem{width:130px;height:140px;margin:0 auto 20px;animation:emblemPulse 3s ease-in-out infinite;}
+  .livebadge{position:absolute;top:18px;right:20px;display:flex;align-items:center;gap:6px;
+    font-size:10px;letter-spacing:2px;color:#8fe6a0;font-weight:700;text-transform:uppercase;}
+  .livedot{width:7px;height:7px;border-radius:50%;background:#6ee68c;animation:dotPulse 1.6s infinite;}
 
-  .title{font-size:40px;font-weight:900;letter-spacing:1px;color:#ff4d6a;animation:titleGlow 3s ease-in-out infinite;}
-  .subtitle{margin-top:2px;font-size:20px;font-weight:800;letter-spacing:10px;color:#fff;text-transform:uppercase;}
+  .emblemwrap{position:relative;width:150px;height:150px;margin:0 auto 20px;overflow:hidden;border-radius:16px;}
+  .emblem{width:150px;height:150px;animation:emblemPulse 3s ease-in-out infinite;position:relative;z-index:1;}
+  .sweeplight{position:absolute;left:-40%;top:0;width:55%;height:220%;
+    background:linear-gradient(100deg, transparent 0%, rgba(255,255,255,0.75) 50%, transparent 100%);
+    animation:toriiSweep 3s ease-in-out infinite;z-index:2;mix-blend-mode:screen;pointer-events:none;}
 
-  .credit{margin-top:22px;font-size:13px;color:#ccc;line-height:1.6;}
-  .credit b{color:#ff8a9c;}
+  .title{font-family:'Cinzel',serif;font-size:36px;font-weight:900;letter-spacing:1px;color:#9a8cff;
+    animation:titleGlow 3s ease-in-out infinite;}
+  .subtitle{margin-top:4px;font-size:18px;font-weight:700;letter-spacing:10px;color:#fff;text-transform:uppercase;
+    font-family:'Rajdhani',sans-serif;}
 
-  .box{margin-top:22px;background:#0a0304;border:1px solid rgba(255,120,140,0.3);border-radius:14px;
-    padding:16px;font-family:monospace;font-size:12px;color:#ddd;word-break:break-all;text-align:left;}
+  .credit{margin-top:22px;font-size:14px;color:#ccc;line-height:1.6;font-weight:600;}
+  .credit b{color:#b3a4ff;}
 
-  .copybtn{margin-top:18px;width:100%;padding:15px;border:none;border-radius:14px;font-weight:900;font-size:15px;
-    letter-spacing:1px;cursor:pointer;text-transform:uppercase;color:#fff;
-    background:linear-gradient(135deg,#ff4d6a,#b3122e);box-shadow:0 10px 30px rgba(255,40,60,0.35);
-    transition:transform 0.15s ease, box-shadow 0.15s ease;}
-  .copybtn:hover{transform:translateY(-2px);box-shadow:0 14px 36px rgba(255,40,60,0.55);}
+  .box{position:relative;margin-top:22px;background:#0a0818;border:1px solid rgba(140,130,255,0.3);border-radius:14px;
+    padding:16px;font-family:'Courier New',monospace;font-size:12.5px;color:#ddd;word-break:break-all;text-align:left;
+    overflow:hidden;}
+  .box::after{content:"";position:absolute;left:0;right:0;top:0;height:40%;
+    background:linear-gradient(rgba(140,130,255,0.14),transparent);animation:scan 3s linear infinite;pointer-events:none;}
+
+  .copybtn{position:relative;overflow:hidden;margin-top:18px;width:100%;padding:16px;border:none;border-radius:14px;
+    font-weight:700;font-size:15px;letter-spacing:1.5px;cursor:pointer;text-transform:uppercase;color:#fff;
+    font-family:'Rajdhani',sans-serif;
+    background:linear-gradient(135deg,#6a8bff,#8a4dff);box-shadow:0 10px 30px rgba(120,100,255,0.35);
+    transition:transform 0.15s ease, box-shadow 0.15s ease, background 0.2s ease;}
+  .copybtn:hover{transform:translateY(-2px);box-shadow:0 14px 36px rgba(120,100,255,0.55);}
   .copybtn:active{transform:translateY(0);}
+  .copybtn.done{background:linear-gradient(135deg,#3fd672,#1c8f4a);}
+  .copybtn .shine{position:absolute;top:0;left:0;width:30%;height:100%;
+    background:linear-gradient(100deg,transparent,rgba(255,255,255,0.45),transparent);
+    animation:btnShine 3.2s ease-in-out infinite;pointer-events:none;}
+  .copybtn .btnlabel{position:relative;z-index:1;}
 
-  .status{margin-top:12px;font-size:12px;color:#ff9aa8;min-height:16px;font-weight:700;}
+  .boxlabel{margin-top:22px;font-size:10px;letter-spacing:3px;color:#7a7aa8;text-transform:uppercase;
+    text-align:left;font-weight:700;}
+  .box{margin-top:6px;}
 
-  .foot{margin-top:22px;font-size:11px;color:#999;letter-spacing:3px;text-transform:uppercase;}
+  .status{margin-top:12px;font-size:12px;color:#b3a4ff;min-height:16px;font-weight:700;}
+
+  .foot{margin-top:22px;font-size:11px;color:#999;letter-spacing:3px;text-transform:uppercase;font-weight:600;}
 </style></head>
 <body>
 <div class="scene">
+  <div class="vignette"></div>
+  <div class="spark" style="left:12%; top:20%;  animation-delay:0.2s;"></div>
+  <div class="spark" style="left:26%; top:60%;  animation-delay:1.4s;"></div>
+  <div class="spark" style="left:44%; top:14%;  animation-delay:0.8s;"></div>
+  <div class="spark" style="left:58%; top:72%;  animation-delay:2.1s;"></div>
+  <div class="spark" style="left:72%; top:30%;  animation-delay:0.5s;"></div>
+  <div class="spark" style="left:86%; top:55%;  animation-delay:1.8s;"></div>
+  <div class="spark" style="left:94%; top:22%;  animation-delay:1.1s;"></div>
   <svg class="skyline" viewBox="0 0 1000 200" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
     <rect width="1000" height="200" fill="none"/>
-    <path d="M0,200 L0,140 L50,140 L50,110 L90,110 L90,150 L140,150 L140,100 L170,100 L170,160 L230,160 L230,120 L270,120 L270,170 L330,170 L330,90 L370,90 L370,160 L440,160 L440,130 L480,130 L480,180 L560,180 L560,110 L610,110 L610,170 L680,170 L680,120 L730,120 L730,190 L820,190 L820,140 L870,140 L870,180 L1000,180 L1000,200 Z" fill="#1a0608" opacity="0.9"/>
+    <path d="M0,200 L0,140 L50,140 L50,110 L90,110 L90,150 L140,150 L140,100 L170,100 L170,160 L230,160 L230,120 L270,120 L270,170 L330,170 L330,90 L370,90 L370,160 L440,160 L440,130 L480,130 L480,180 L560,180 L560,110 L610,110 L610,170 L680,170 L680,120 L730,120 L730,190 L820,190 L820,140 L870,140 L870,180 L1000,180 L1000,200 Z" fill="#160f30" opacity="0.9"/>
   </svg>
   <div class="petal" style="left:6%;  animation-duration:7s;  animation-delay:0s;"></div>
   <div class="petal" style="left:18%; animation-duration:9s;  animation-delay:1.2s; width:10px;height:10px;"></div>
@@ -64,34 +121,127 @@
   <div class="petal" style="left:88%; animation-duration:6.8s;animation-delay:2.1s;"></div>
   <div class="petal" style="left:95%; animation-duration:8.6s;animation-delay:1.0s; width:10px;height:10px;"></div>
 
+  <div class="orb" style="width:220px;height:220px;left:-10%;top:10%;background:#5a6bff;animation-delay:0s;"></div>
+  <div class="orb" style="width:260px;height:260px;right:-12%;bottom:8%;background:#9a4dff;animation-delay:2s;"></div>
+
+  <div class="cardglow">
   <div class="card">
-    <svg class="emblem" viewBox="0 0 130 140" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stop-color="#ff4d6a"/>
-          <stop offset="100%" stop-color="#6e0f1f"/>
-        </linearGradient>
-      </defs>
-      <polygon points="65,6 110,46 100,110 65,134 30,110 20,46" fill="#160608" stroke="url(#g1)" stroke-width="4"/>
-      <polygon points="65,26 92,50 85,98 65,114 45,98 38,50" fill="url(#g1)" opacity="0.85"/>
-      <polygon points="65,40 78,54 73,86 65,96 57,86 52,54" fill="#160608"/>
-      <polygon points="8,70 30,46 36,52 16,76" fill="url(#g1)"/>
-      <polygon points="122,70 100,46 94,52 114,76" fill="url(#g1)"/>
-    </svg>
+    <div class="grain"></div>
+    <div class="cardinner">
+    <div class="livebadge"><span class="livedot"></span>Online</div>
+    <div class="emblemwrap">
+      <svg class="emblem" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="toriiMain" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#a9c6ff"/>
+            <stop offset="30%" stop-color="#8ab4ff"/>
+            <stop offset="60%" stop-color="#8a6bff"/>
+            <stop offset="100%" stop-color="#4a33b8"/>
+          </linearGradient>
+          <linearGradient id="toriiMainV" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#b9cfff"/>
+            <stop offset="45%" stop-color="#8a6bff"/>
+            <stop offset="100%" stop-color="#4a33b8"/>
+          </linearGradient>
+          <linearGradient id="toriiShade" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#2a1f66"/>
+            <stop offset="100%" stop-color="#110b2b"/>
+          </linearGradient>
+          <linearGradient id="toriiEdge" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#1a1340" stop-opacity="0.75"/>
+            <stop offset="100%" stop-color="#1a1340" stop-opacity="0"/>
+          </linearGradient>
+          <radialGradient id="toriiGlow" cx="50%" cy="40%" r="60%">
+            <stop offset="0%" stop-color="#9ab6ff" stop-opacity="0.4"/>
+            <stop offset="100%" stop-color="#9ab6ff" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="groundShadow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#000" stop-opacity="0.55"/>
+            <stop offset="100%" stop-color="#000" stop-opacity="0"/>
+          </radialGradient>
+          <filter id="softBlur" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="1.1"/>
+          </filter>
+        </defs>
 
-    <div class="title">ALPHA EMPIRE</div>
-    <div class="subtitle">Protector</div>
+        <circle cx="75" cy="68" r="62" fill="url(#toriiGlow)"/>
 
-    <div class="credit">
-      This script is protected by <b>Alpha Empire</b><br>
-      Made by <b>AAYAN</b> &mdash; AAYANZZ PAPA KI SCRIPT chori karne ki koshish mat kar, betee.
+        <!-- ground contact shadow -->
+        <ellipse cx="75" cy="130" rx="58" ry="7" fill="url(#groundShadow)"/>
+
+        <!-- base stone pedestals -->
+        <rect x="22" y="116" width="18" height="16" rx="2" fill="url(#toriiShade)"/>
+        <rect x="110" y="116" width="18" height="16" rx="2" fill="url(#toriiShade)"/>
+        <rect x="22" y="116" width="18" height="3" rx="1.5" fill="#4a3ea8" opacity="0.6"/>
+        <rect x="110" y="116" width="18" height="3" rx="1.5" fill="#4a3ea8" opacity="0.6"/>
+
+        <!-- two main pillars (slightly tapered, torii-style, rounded columns) -->
+        <polygon points="25,122 29,34 39,34 41,122" fill="url(#toriiMainV)"/>
+        <polygon points="109,122 111,34 121,34 125,122" fill="url(#toriiMainV)"/>
+        <!-- pillar core highlight (cylindrical sheen) -->
+        <polygon points="29,34 32,34 30,122 28,122" fill="#d7e4ff" opacity="0.55"/>
+        <polygon points="113,34 116,34 115,122 113,122" fill="#d7e4ff" opacity="0.5"/>
+        <!-- pillar shaded edge (right side of each column, gives roundness) -->
+        <polygon points="36,34 39,34 41,122 37,122" fill="url(#toriiEdge)"/>
+        <polygon points="118,34 121,34 125,122 120,122" fill="url(#toriiEdge)"/>
+
+        <!-- kasagi: curved top lintel with upturned ends -->
+        <path d="M6,38 Q75,12 144,38 L144,48 Q75,24 6,48 Z" fill="url(#toriiMain)"/>
+        <path d="M6,38 Q75,12 144,38 L144,42 Q75,16 6,42 Z" fill="#d9e4ff" opacity="0.65"/>
+        <path d="M6,44 Q75,20 144,44 L144,48 Q75,24 6,48 Z" fill="#241a5c" opacity="0.4"/>
+        <!-- upturned kasagi tips -->
+        <path d="M2,41 Q4,30 14,30 L14,40 Q8,40 6,48 Z" fill="url(#toriiMain)"/>
+        <path d="M148,41 Q146,30 136,30 L136,40 Q142,40 144,48 Z" fill="url(#toriiMain)"/>
+        <!-- shimaki: straight bar under kasagi -->
+        <rect x="18" y="51" width="114" height="7" rx="2" fill="url(#toriiShade)"/>
+        <rect x="18" y="51" width="114" height="2" fill="#5a4bc8" opacity="0.6"/>
+
+        <!-- nuki: lower crossbeam, threaded through the pillars -->
+        <rect x="14" y="76" width="122" height="11" rx="2" fill="url(#toriiMainV)"/>
+        <rect x="14" y="76" width="122" height="3" fill="#d7e4ff" opacity="0.5"/>
+        <rect x="14" y="84" width="122" height="3" fill="#241a5c" opacity="0.55"/>
+        <!-- nuki ends poking past the pillars -->
+        <rect x="8" y="77" width="8" height="9" rx="1.5" fill="url(#toriiShade)"/>
+        <rect x="134" y="77" width="8" height="9" rx="1.5" fill="url(#toriiShade)"/>
+
+        <!-- subtle wood-grain lines for texture -->
+        <g opacity="0.3" stroke="#1a1340" stroke-width="0.6" filter="url(#softBlur)">
+          <path d="M28,40 Q30,70 27,118"/>
+          <path d="M112,40 Q114,70 111,118"/>
+        </g>
+
+        <!-- gaku: center plaque with the A monogram -->
+        <rect x="60" y="59" width="30" height="24" rx="3" fill="#140d33" stroke="url(#toriiMain)" stroke-width="2"/>
+        <rect x="60" y="59" width="30" height="6" rx="3" fill="#ffffff" opacity="0.12"/>
+        <text x="75" y="77" text-anchor="middle" font-family="Cinzel, serif" font-weight="900" font-size="18"
+          fill="url(#toriiMain)">A</text>
+      </svg>
+      <div class="sweeplight"></div>
     </div>
 
-    <div class="box" id="loadstringBox">loadstring(game:HttpGet("LOADSTRING_URL"))()</div>
-    <button class="copybtn" id="copyBtn">Copy Script</button>
+    <div class="title" style="animation:titleGlow 3s ease-in-out infinite, fadeUp 0.6s ease-out 0.1s backwards;">ALPHA EMPIRE</div>
+    <div class="subtitle" style="animation:fadeUp 0.6s ease-out 0.2s backwards;">Protector</div>
+
+    <div class="credit" style="animation:fadeUp 0.6s ease-out 0.3s backwards;">
+      This script is protected by <b>Alpha Empire</b><br>
+      Made by <b>AAYAN</b> &mdash; chori karne ki koshish mat kar, bache.
+    </div>
+
+    <div class="boxlabel" style="animation:fadeUp 0.6s ease-out 0.4s backwards;">Script Endpoint</div>
+    <div class="box" id="loadstringBox" style="animation:fadeUp 0.6s ease-out 0.45s backwards;">loadstring(game:HttpGet("LOADSTRING_URL"))()</div>
+    <button class="copybtn" id="copyBtn" style="animation:fadeUp 0.6s ease-out 0.55s backwards;">
+      <span class="btnlabel">Copy Script</span>
+      <span class="shine"></span>
+    </button>
     <div class="status" id="status"></div>
 
-    <div class="foot">Alpha Empire &bull; Aayanzz Edition</div>
+    <div class="foot" style="animation:fadeUp 0.6s ease-out 0.65s backwards;">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" style="vertical-align:-2px;margin-right:4px;">
+        <path d="M12 2L3 6v6c0 5 4 9 9 10 5-1 9-5 9-10V6l-9-4z" fill="#8a6bff" opacity="0.8"/>
+      </svg>Alpha Empire &bull; Aayan Edition
+    </div>
+    </div>
+  </div>
   </div>
 </div>
 <script>
@@ -101,13 +251,20 @@
   const currentLine = `loadstring(game:HttpGet("${origin}/load"))()`;
   box.textContent = currentLine;
 
-  document.getElementById('copyBtn').addEventListener('click', async () => {
+  const copyBtn = document.getElementById('copyBtn');
+  const btnLabel = copyBtn.querySelector('.btnlabel');
+  const originalLabel = btnLabel.textContent;
+  copyBtn.addEventListener('click', async () => {
     try {
       await navigator.clipboard.writeText(currentLine);
       statusEl.textContent = 'Copied! Paste in your executor.';
+      btnLabel.textContent = 'Copied ✓';
+      copyBtn.classList.add('done');
+      setTimeout(() => { btnLabel.textContent = originalLabel; copyBtn.classList.remove('done'); }, 1800);
     } catch (e) {
       statusEl.textContent = 'Copy failed, select the box text manually.';
     }
   });
 </script>
 </body></html>
+         
